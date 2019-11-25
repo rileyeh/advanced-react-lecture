@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import DisplayAndContainer from './Components/DC/Index'
+import HigherOrder from './Components/HOC/Index'
+import RenderProps from './Components/RenderProps/Index'
+import PropsChildren from './Components/PropsChildren/Index'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      display: ''
+    }
+
+    this.toggle = this.toggle.bind(this)
+  }
+
+  toggle(display) {
+    this.setState({display})
+  }
+
+  render() {
+    let {display} = this.state
+    return(
+      <div>
+        <div className='btns'>
+          <button onClick={() => this.toggle('dc')}>display and container</button>
+          <button onClick={() => this.toggle('hoc')}>higher order</button>
+          <button onClick={() => this.toggle('rp')}>render props</button>
+          <button onClick={() => this.toggle('pc')}>props.children</button>
+        </div>
+
+        {display === 'dc' && <DisplayAndContainer/>}
+        {display === 'hoc' && <HigherOrder/>}
+        {display === 'rp' && <RenderProps/>}
+        {display === 'pc' && <PropsChildren/>}
+
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
